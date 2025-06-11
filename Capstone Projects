@@ -1,43 +1,59 @@
+''' Capstone project - Variables and Control structures
+Creating a finance calculator'''
+
 import math
-#Finance calculator programme
-#Optional: Prompt the user to enter their name.
-name = input("Please input your name and surname: ")
-print(f"Welcome, {name}")
-#Prompt choose what they want to do on the programme
-print("investment- to calculate the amount of interest you will earn on your investment")
-print("Bond- To calculate the amount you will have to pay on a home loan")
-user_selection = str(input("Enter either 'investment' or 'bond' from the menu above to proceed: "))
-#Create a variable to store the outputs the user will select
-investment = "investment"
-bond = "bond"
-simple = "Simple"
-compound = "Compound"
-#if the user selects investment ask for: Amount of money they are investing, Interest rate, number of years and to choose either simple or compound interest
-if user_selection == investment:
-    P = float(input("How much would you like to invest?: "))
-    r = float(input("What is the interest?: "))
-    #Create a formula that will divide the interest by 100
-    investment_interest = (r/100)
-    t = int(input("What is the investment term in 'years'?: "))
-    interest = str(input("Do you want 'Simple' or 'Compound' interest?: "))
-    #Create a formula that will calculate the option the user will select
-    simple_formula = int(P*(1+investment_interest*t)) #P = ampount invested, investment_interest = r, t = term
-    compound_formula = int(P*math.pow((1+investment_interest), t))
-    if interest == simple:
-        print(f"{name} your total invested amount with interest is: R{simple_formula}")
-    elif interest == compound:
-        print(f"{name} your total invested amount with interest is: R{compound_formula}")
-#if the user selects bond: calculate the amount they will pay for their bond
-if user_selection == bond:
-    P = float(input("What is the value of the house?: "))
-    i = float(input("What is the annual interest rate?: "))
-    #Create a formula for the interest rate
-    bond_interest = ((i/100)/12)
-    n = int(input("The number of months you plan to repay the bond: "))
-#Create a formula that will calculate the bond amount
-#Replace the i in the formula with "bond_interest"
-    bond_formula = int((bond_interest*P)/(1-(1+bond_interest)**(-n))) # i = interest, P = value of the house, n = number of years
-    print(f"{name} your total bond payment is: R{bond_formula}")
-#Else if the user did not follow the steps print an error message
+
+#Menu
+
+print(
+  "Investmet - to calculate the amount of interest you will earn on your investment"
+  )
+print(
+"Bond - to calculate the amount you wull have to pay on a home loan"
+)
+
+#Prompt the user to select an option
+
+user_input = str(input("Enter either 'investment' or 'bond' from the menu above to proceed: ")).lower()
+
+#user option is investment
+
+if user_input == 'investment':
+  inv_amount = int(input("How much would you like to invest:\nR"))
+  inv_interest = float(input("How much is the interest: \n"))
+  inv_years = int(input("How lohg is your investment in years: \n"))
+  interest = str(input("Would you like to invest in 'simple' or 'compound' interest: \n")).lower()
+  
+  #Simple and Compund interest formula
+  
+  simple_interest = int(inv_amount * (1 + inv_interest * inv_years))
+  compound_formul = int(inv_amount * math.pow((1+inv_interest), inv_years))
+  
+  if interest == 'simple':
+    print(
+      f"Your to total money invested with interest is: R{simple_interest}"
+      )
+  elif interest == 'compound':
+    print(
+      f"Your total amount invested with interest is: R{compound_interest}"
+      )
+    
+  else:
+    print("Invalid inout")
+#user option is a Bond
+
+elif user_input == 'bond':
+  bnd_value = float(input("What is the current value of your house: \nR"))
+  bnd_interest = float(input("How much is the interest: \n"))
+  bnd_months = int(input("What is the term of your bond in months: \n"))
+  
+  #bond formula
+  
+  bond_formula = int((bnd_interest * bnd_value)/
+  (1-(1 + bnd_interest)**(-bnd_months)))
+  print(f"Your bond repayment is: R{bond_formula}")
+  
+#Print a error message
+
 else:
-    print("invalid input")
+  print("invalid input")
